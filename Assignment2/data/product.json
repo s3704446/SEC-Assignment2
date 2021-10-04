@@ -1,0 +1,32 @@
+{
+    "Cup": {
+        "name": "Coffee Cup",
+        "price": "15.00",
+        "image": "data/images/cup.jpg"
+    },
+    "Toy": {
+        "name": "Toy Guitar",
+        "price": "48.00",
+        "image": "data/images/toy.PNG"
+    },
+    "Strawberry": {
+        "name": "Fresh Strawberry",
+        "price": "20.00",
+        "image": "data/images/strawberry.jpg"
+    },
+    "Phone Case": {
+        "name": "Phone Case",
+        "price": "25.00",
+        "image": "data/images/case.jpg"
+    },
+    "Youghurt": {
+        "name": "Youghurt",
+        "price": "8.00",
+        "image": "data/images/youghurt.jpg"
+    },
+    "Chair": {
+        "name": "Comfortable Chair",
+        "price": "325.00",
+        "image": "data/images/chair.jpg"
+    }
+}

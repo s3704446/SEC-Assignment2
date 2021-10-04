@@ -1,0 +1,140 @@
+body {
+    background-color: aliceblue;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+h1{
+    text-align: center;
+}
+
+.user-form {
+    background-color: rgb(109, 105, 105);
+    color: white;
+    width: 50%;
+    height: 400px;
+    margin-left: 25%;
+    text-align: center;
+    margin-top: 200px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 2px rgb(54, 54, 54);
+}
+
+#register-form{
+    height: 600px;
+}
+
+.useform div {
+    height: 200px;
+    width: 80%;
+}
+
+.form-content label {
+    margin-left: -40%;
+}
+
+.form-content input {
+    border-radius: 5px;
+    height: 40px;
+}
+.form-content input:focus{
+    outline: none;
+}
+.form-content button{
+    background-color: rgb(47, 170, 47);
+    height: 30px;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    width: 40%;
+}
+.form-content button:hover{
+    background-color: rgb(43, 133, 43);
+}
+
+ul{
+    background-color: rgb(65, 61, 61);
+    text-decoration: none;
+}
+ul li{
+    color: white;
+    list-style-type: none;
+    display: inline-block;
+    text-decoration: none;
+    padding: 20px;
+    transition: background-color 0.5s;
+}
+ul li:hover{
+    background-color: rgb(34, 32, 32);
+}
+
+.product-details{
+    width:40%;
+    height: 500px;
+    margin-left: 5%;
+    display: inline-block;
+    text-align: center;
+    border-radius: 5px;
+    transition: background-color 0.5s, transform 0.5s;
+}
+.product-details:hover{
+    background-color: rgb(204, 217, 228);
+    transform: translateY(-5px);
+}
+.product-details img{
+    margin-top: 20px;
+    width: 300px;
+    height: 300px;
+    position: relative;
+}
+.product-details button{
+    border: none;
+    border-radius: 5px;
+    width: 35%;
+    height: 30px;
+    color: white;
+    background-color: rgb(47, 170, 47);
+    transition: background-color 0.5s;
+}
+.product-details button:hover{
+    background-color: rgb(43, 133, 43);
+}
+
+table{
+    width:70%;
+    text-align: center;
+    font-size: 30px;
+    margin-left: 15%;
+}
+
+
+table tr{
+    border-radius: 5px;
+}
+
+td{
+    padding: 20px;
+}
+td input{
+    width: 50px;
+    height: 40px;
+    border-radius: 5px;
+}
+.cart-image{
+    width: 200px;
+    height: 200px;
+}
+.delete-btn{
+    background-color: rgb(216, 38, 38);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    transition: background-color 0.5s;
+}
+.delete-btn:hover{
+    background-color: rgb(163, 26, 26);
+}
