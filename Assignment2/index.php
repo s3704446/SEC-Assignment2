@@ -10,11 +10,12 @@
 
 ?>
 <!DOCTYPE html>
-<link rel="stylesheet" href="css/myStyle.css">
-<script type="text/javascript" src="js/jquery.js"></script>
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="css/myStyle.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <title>Home</title>
 </head>
 
 <body>

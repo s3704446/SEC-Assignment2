@@ -74,22 +74,47 @@
         return $hash === generatePasswordHash($password, $salt);
     }
 
+    function get_rsa_publickey($filename){
+        return openssl_pkey_get_public('file://'.$filename);
+    }
+    function get_rsa_privatekey($filename){
+        return openssl_pkey_get_private('file://'.$filename);
+    }
+    function rsa_encryption($plaintext, $publicKey){
+        openssl_public_encrypt($plaintext, $encrypted, $publicKey);
+        openssl_free_key($publicKey);
+        return base64_encode($encrypted);
+    }
+    function rsa_decryption($encrypted, $privateKey){
+        openssl_private_decrypt(base64_decode($encrypted), $decrypted, $privateKey);
+        openssl_free_key($privateKey);
+        return $decrypted;
+    }
   
     function readCart() {
         return readJsonFile(CART_PATH);
     }
 
-    function updateCart($cartStats) {
-        updateJsonFile($cartStats, CART_PATH);
+    function updateCartStats($userStats) {
+        updateJsonFile($userStats, CART_PATH);
+    }
+    function updateCart($form,$email)
+    {
+        $userStats = readCart();
+
+        if (!empty($userStats[$email][$form['product-name']])){
+            $userStats[$email][$form['product-name']] = $form;
+        }
+        updateCartStats($userStats);
+    }
+    function deleteCart($form,$email){
+        deleteJsonFileUserStatus($form['product-name'], CART_PATH,$email);
     }
 
     function getCart($email) {
         $cartStats = readCart();
 
         return isset($cartStats[$email]) ? $cartStats[$email] : [];
-    }
-    function deleteCart($form,$email){
-        deleteJsonFileUserStatus($form['id'], CART_PATH,$email);
     }
 
     function addCart($form, $email) {
@@ -106,6 +131,7 @@
 
         $key = 'product-quantity';
         if(!isset($form[$key]) || preg_match('/^\s*$/', $form[$key]) === 1);
+
         
             $activity = [
                 'product-name' => htmlspecialchars(trim($form['product-name'])),
@@ -117,7 +143,7 @@
             $cartStats = readCart();
             $cartStats[$email][$activity['product-name']] = $activity;
 
-            updateCart($cartStats);
+            updateCartStats($cartStats);
         }
 
         return $errors;
@@ -159,6 +185,9 @@
             $errors[$key] = 'Email is invalid.';
 
         $key = 'password';
+        $ciphertextReceived = $form[$key];
+        $privateKey = get_rsa_privatekey('private.key');
+	    $decrypted = rsa_decryption($ciphertextReceived, $privateKey);
         if(!isset($form[$key]) || preg_match('/^\s*$/',$form[$key])===1)
             $errors[$key] = 'Password Error!';
             
@@ -166,9 +195,7 @@
         if(count($errors) === 0) {
             $user = getUser($form['email']);
 
-
-
-            if($user !== null && verifyPasswordHash($form['password'], $user['password-hash']))
+            if($user !== null && verifyPasswordHash($decrypted, $user['password-hash']))
 
                 $_SESSION[USER_SESSION_KEY] = $user;
             else

@@ -3,9 +3,8 @@
     $user = getLoggedInUser();
     $cart = getCart($user['email']);
 
-    if(isset($_POST['update'])){
-        addCart($_POST, $user['email']);
-        header('Location: cart.php');
+    if(isset($_POST['pay'])){
+        header('Location: index.php' );
     }
 ?>
 <!DOCTYPE html>
@@ -15,7 +14,7 @@
 <head>
     <link rel="stylesheet" href="css/myStyle.css">
     <script type="text/javascript" src="js/jquery.js"></script>
-    <title>Shopping Cart</title>
+    <title>Checkout</title>
 </head>
 
 <body>
@@ -35,7 +34,7 @@
 
 
         <table id="cart-table">
-            <h1>Shopping Cart</h1>
+            <h1>Checkout</h1>
             <tr>
                 <th></th>
                 <th>Name</th>
@@ -53,11 +52,10 @@
                     </td>
                     <td><?= $value['product-name'] ?> <input type="hidden" id="product-name" name="product-name"
                             value="<?= $value['product-name'] ?>" /></td>
-                    <td><input type="number" id="product-quantity" name="product-quantity"
+                    <td><?= $value['product-quantity'] ?><input type="hidden" id="product-quantity" name="product-quantity"
                             value="<?= $value['product-quantity'] ?>" min="0"></td>
                     <td id="subPrice"><?php echo $value['product-quantity']*$value['product-price']?> <input
                             type="hidden" name="product-price" value="<?= $value['product-price']?>" /></td>
-                    <td><button class="update-btn" name="update">Update</button></td>
                 </form>
             </tr>
 
@@ -65,11 +63,20 @@
             <?php } ?>
 
         </table>
-        
 
         <span id="sum"></span>
+
         <hr>
-        <a href="checkout.php?username=<?=$user['email'] ?>" ><button id="checkout-btn" name="checkout">Checkout</button></a>
+        <h1>Payment</h1>
+        <form id="payment" method="post">
+            <label>Credit Card No:</label><br>
+                <input type="text" id="credit-card" name="credit-card">
+                <br><br>
+            <label>Password:</label><br>
+                <input type="password" id="password" name="password">
+                <br><br>
+                <button name="pay" type="submit" >Pay Now!</button>
+            </form>
 
         <script type="text/javascript">
            var table = document.getElementById("cart-table"), sumVal = 0;
